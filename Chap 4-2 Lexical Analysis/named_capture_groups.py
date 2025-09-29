@@ -33,6 +33,8 @@ m2 = rex2.search("sum = 10")
 print(m2.group("var"))
 print(m2.group("value"))
 print(m2.groupdict())
+print(m2.lastgroup)
+print(m2.group())
 
 #Backreference the same text
 rex3 = re.compile(r"(?P<word>\w+)\s+(?P=word)")

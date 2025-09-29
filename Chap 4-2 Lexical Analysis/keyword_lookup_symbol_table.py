@@ -44,4 +44,11 @@ TOKEN_SPEC = [
 
 TOKEN_REGEX = '|'.join(f'(?P<{name}>{pattern})' for name, pattern in TOKEN_SPEC)
 
-print(TOKEN_REGEX)
+# SYMBOL TABLE (seeded by the lexer when it sees new identifiers)
+symbol_table = {}
+
+def tokenize(code: str):  # code: str means this function expects code to be a string
+    tokens = []
+    for match_object in re.finditer(TOKEN_REGEX, code):
+        pass
+
