@@ -50,5 +50,48 @@ symbol_table = {}
 def tokenize(code: str):  # code: str means this function expects code to be a string
     tokens = []
     for match_object in re.finditer(TOKEN_REGEX, code):
-        pass
+        kind = match_object.lastgroup
+        lexeme = match_object.group()
+
+        if kind == 'SKIP':
+            continue
+
+        if kind == 'MISMATCH':
+            tokens.append(('ERROR', lexeme))
+            continue
+
+        if kind == 'ID':
+            if lexeme in KEYWORDS:
+                tokens.append((KEYWORDS[lexeme], lexeme))
+            else:
+                tokens.append(('IDENT', lexeme))
+                # seed symbol table if first time we see this identifier
+                symbol_table.setdefault(lexeme, {
+                    'type': None,  # to be filled by later phases
+                    'scope': None,  # to be filled by later phases
+                    'attributes': {}  # extra info (e.g., line numbers) later
+                })
+        else:
+            tokens.append((kind, lexeme))
+
+    return tokens
+
+
+code = '''
+int total = value + 3;
+if (total > 10) return total; else 0;
+'''
+
+tokens = tokenize(code)
+print('TOKENS:')
+
+for token in tokens:
+    print(token)
+
+print("\nSYMBOL TABLE (seeded by lexer):")
+for name, info in symbol_table.items():
+    print(name, "→", info)
+
+
+
 
