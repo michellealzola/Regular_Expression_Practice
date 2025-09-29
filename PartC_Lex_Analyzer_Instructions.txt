@@ -1,0 +1,13 @@
+Part C: Lexical Analyzer
+Using programming language, create a lexical analyzer (parser) that processes input based on the
+problem statement and syntax defined in Part B.
+
+Write a method to accept any number of inputs from the users.
+
+Add error handling to manage incorrect inputs.
+
+Display appropriate error messages to the user when invalid input is detected.
+
+Include comments throughout your code to explain the purpose and functionality of each section.
+
+Test your program with different types of inputs from the users, such as edge cases and invalid inputs.
